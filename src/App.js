@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
 import data from './assets/data.json';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SearchBar from 'components/SearchBar';
 import Home from './components/Home';
-import { Playback } from './components/Playback';
+import Playback from './components/Playback';
+import './index.css';
 
 export const App = () => {
   console.log(data);
 
-  const [videos, setVideos] = useState([]);
+  // const [videos, setVideos] = useState([]);
   return (
     <>
       <SearchBar placeholder='Search' data={data} />
-      <Home data={data} />
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' component={<Home.js />} />
-          {/* <Route path='/playback' element={<Playback.js />} /> */}
-        </Routes>
-      </BrowserRouter>
+      <Router>
+        <Switch>
+          <Route path='/'>
+            <Home data={data} />
+          </Route>
+        </Switch>
+        <Switch>
+          <Route path='/playback'>
+            <Playback />
+          </Route>
+        </Switch>
+      </Router>
     </>
   );
 };

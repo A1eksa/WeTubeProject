@@ -1,19 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
+import { ReactComponent as ReactLogo } from './logo.svg';
 
 export const SearchBar = ({ placeholder, data }) => {
+  const [filteredData, setFilteredData] = useState([]);
+  const [wordEntered, setWordEntered] = useState('');
+
+  const handleFilter = (event) => {
+    const searchWord = event.target.value;
+    setWordEntered(searchWord);
+    console.log(searchWord);
+
+    const newFilter = data.filter((value) => {
+      return value.videoName.toLowerCase().includes(searchWord.toLowerCase());
+    });
+
+    if (searchWord === '') {
+      setFilteredData([]);
+    } else {
+      setFilteredData(newFilter);
+    }
+  };
   return (
     <Wrapper>
+      <ReactLogo />
       <InnerWrapper>
         <InputContainer>
-          <Input type='text' placeholder={placeholder} />
+          <Input
+            type='text'
+            value={wordEntered}
+            placeholder={placeholder}
+            onChange={handleFilter}
+          />
           <Button>
             <BsSearch fill='white' />
           </Button>
         </InputContainer>
+
+        {filteredData.length != 0 && (
+          <DataResult>
+            {/* <div> */}
+            {filteredData.map((value) => {
+              return (
+                // <Link >
+                <a href={value.videoId}>
+                  <DataItem>{value.videoName}</DataItem>
+                </a>
+                // </Link>
+              );
+            })}
+            {/* </div> */}
+          </DataResult>
+        )}
       </InnerWrapper>
-      <Line></Line>
     </Wrapper>
   );
 };
@@ -49,9 +90,11 @@ const Input = styled.input`
   }
 `;
 
-export const Line = styled.div`
+{
+  /* export const Line = styled.div`
   border-bottom-color: red;
-`;
+`; */
+}
 
 export const InputContainer = styled.div`
   displey: flex;
@@ -59,4 +102,21 @@ export const InputContainer = styled.div`
 
 export const Button = styled.button`
   background-color: var(--text-secondary);
+`;
+
+export const DataResult = styled.div`
+  margin-top: 5px;
+  width: 40%;
+  height: 100px;
+  overflow: hidden;
+  overflow-y: auto;
+  background-color: white;
+`;
+
+export const DataItem = styled.p`
+  width: 100%;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  color: black;
 `;

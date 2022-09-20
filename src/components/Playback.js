@@ -1,7 +1,11 @@
 import React from 'react';
 
-export const Playback = () => {
-  return <div>Playback</div>;
+const Playback = () => {
+  return (
+    <div>
+      PlaybackPlaybackPlaybackPlaybackPlaybackPlaybackPlaybackPlaybackPlayback
+    </div>
+  );
 };
 
-// export default Playback;
+export default Playback;
