@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GrHomeRounded, GrHistory } from 'react-icons/gr';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 import {
   MdOutlineExplore,
   MdOutlineSubscriptions,
@@ -53,13 +54,23 @@ export const SideBar = () => {
       </IconWrapper>
       <Line></Line>
       <TitleText>SUBSCRIPTIONS</TitleText>
+      <IconWrapper>
+        <Text>Masha and the bear</Text>
+      </IconWrapper>
+      <IconWrapper>
+        <Text>Barnplaneten</Text>
+      </IconWrapper>
+      <IconWrapper>
+        <AiOutlinePlusCircle fill='#ffffff' />
+        <Text>Browse channels</Text>
+      </IconWrapper>
     </SideBarWrapper>
   );
 };
 
 export const SideBarWrapper = styled.section`
   height: 100wh;
-  width: 200px;
+  width: 30%;
   background-color: var(--background-medium);
 `;
 

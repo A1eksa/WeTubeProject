@@ -2,9 +2,7 @@ import React from 'react';
 import ReactPlayer from 'react-player';
 import styled from 'styled-components';
 import { SideBar } from './SideBar';
-import { SearchBar } from './SearchBar';
-
-// import { BsDot } from 'react-icons/bs';
+import { SelectorBar } from './SelectorBar';
 
 const Home = ({ data }) => {
   console.log(data);
@@ -13,35 +11,36 @@ const Home = ({ data }) => {
     <>
       <Wrapper>
         <SideBar />
-        <VideoWrapper>
-          {data.map((video, key) => (
-            <Card>
-              <ReactPlayer
-                controls={false}
-                width='95%'
-                height='100%'
-                url={video.videoId}
-              />
+        <MainWrapper>
+          <SelectorBar />
+          <VideoWrapper>
+            {data.map((video, key) => (
+              <Card>
+                <ReactPlayer
+                  controls={false}
+                  width='95%'
+                  height='100%'
+                  url={video.videoId}
+                />
 
-              <InnerWrapper>
-                <Left>
-                  <Thumbnail src={video.channelThumbnail}></Thumbnail>
-                </Left>
-                <Right>
-                  <Link href={video.videoId} target='blank'>
-                    <VideoName key={video.id}>{video.videoName}</VideoName>
-                  </Link>
-                  {/* <VideoName key={video.id}>{video.videoName}</VideoName> */}
-                  <ViewsWrapper>
-                    <Views> {video.views.toString().slice(0, 4)} views</Views>
-                    {/* <BsDot classname='dot' /> */}
-                    <Views>{video.timeViewed}</Views>
-                  </ViewsWrapper>
-                </Right>
-              </InnerWrapper>
-            </Card>
-          ))}
-        </VideoWrapper>
+                <InnerWrapper>
+                  <Left>
+                    <Thumbnail src={video.channelThumbnail}></Thumbnail>
+                  </Left>
+                  <Right>
+                    <Link href={video.videoId} target='blank'>
+                      <VideoName key={video.id}>{video.videoName}</VideoName>
+                    </Link>
+                    <ViewsWrapper>
+                      <Views> {video.views.toString().slice(0, 4)} views</Views>
+                      <Views>{video.timeViewed}</Views>
+                    </ViewsWrapper>
+                  </Right>
+                </InnerWrapper>
+              </Card>
+            ))}
+          </VideoWrapper>
+        </MainWrapper>
       </Wrapper>
     </>
   );
@@ -55,6 +54,12 @@ export const Wrapper = styled.div`
   flex-direction: row;
 `;
 
+export const MainWrapper = styled.div`
+  width: vw;
+  display: flex;
+  flex-direction: column;
+`;
+
 export const VideoWrapper = styled.section`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -63,13 +68,6 @@ export const VideoWrapper = styled.section`
   grid-row-gap: 2rem;
   padding: 2rem;
   background-color: var(--background);
-`;
-
-export const ListWrapper = styled.section`
-  //   display: flex;
-  //   flex-direction: column;
-  //   grid-template-columns: 1fr 1fr;
-  //   gap: 1.5rem;
 `;
 
 export const Card = styled.div`

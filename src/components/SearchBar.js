@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { BsSearch } from 'react-icons/bs';
-import { ReactComponent as ReactLogo } from './logo.svg';
+import { BiMicrophone } from 'react-icons/bi';
+import logo from '../components/logo.svg';
 
 export const SearchBar = ({ placeholder, data }) => {
   const [filteredData, setFilteredData] = useState([]);
@@ -25,9 +25,9 @@ export const SearchBar = ({ placeholder, data }) => {
   };
   return (
     <Wrapper>
-      <ReactLogo />
       <InnerWrapper>
         <InputContainer>
+          <Logo src={logo}></Logo>
           <Input
             type='text'
             value={wordEntered}
@@ -37,21 +37,20 @@ export const SearchBar = ({ placeholder, data }) => {
           <Button>
             <BsSearch fill='white' />
           </Button>
+          {/* <Microphone>
+            <BiMicrophone fill='#ffffff' />
+          </Microphone> */}
         </InputContainer>
 
         {filteredData.length != 0 && (
           <DataResult>
-            {/* <div> */}
             {filteredData.map((value) => {
               return (
-                // <Link >
                 <a href={value.videoId}>
                   <DataItem>{value.videoName}</DataItem>
                 </a>
-                // </Link>
               );
             })}
-            {/* </div> */}
           </DataResult>
         )}
       </InnerWrapper>
@@ -65,43 +64,50 @@ export const Wrapper = styled.header`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 15%;
+  height: auto;
   background-color: var(--background-medium);
 `;
 
 export const InnerWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 25%;
-  padding: 1rem;
-  margin-left: 25%;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 10px;
 `;
 
 const Input = styled.input`
   font-size: 18px;
   padding: 7px 0 7px 7px;
   margin: 0;
+  margin-top: 0;
   width: 40%;
   background: rgb(18, 18, 18);
   border: solid 1px rgb(136, 136, 136);
-  border-radius: 3px;
+  border-radius: 3px 0 0 3px;
+  box-shadow: none;
   ::placeholder {
     color: rgb(136, 136, 136);
   }
 `;
 
-{
-  /* export const Line = styled.div`
-  border-bottom-color: red;
-`; */
-}
-
 export const InputContainer = styled.div`
   displey: flex;
+  flex-direction: row;
+  margin-top: 0;
+  padding-top: 0;
 `;
 
 export const Button = styled.button`
   background-color: var(--text-secondary);
+  border: none;
+  color: white;
+  padding: 9px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 0 3px 3px 0;
 `;
 
 export const DataResult = styled.div`
@@ -119,4 +125,20 @@ export const DataItem = styled.p`
   display: flex;
   align-items: center;
   color: black;
+`;
+
+// export const Microphone = styled.div`
+//   background-color: var(--background);
+//   width 35px;
+//   height: 35px;
+//   border-radius: 50%;
+// `;
+
+const Logo = styled.img`
+  width: 120px;
+  height: 30px;
+  padding: 10px 14px 0 30px;
+  filter: invert();
+  margin-bottom: 0;
+  padding-right: 60px;
 `;

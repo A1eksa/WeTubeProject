@@ -9,7 +9,6 @@ import './index.css';
 export const App = () => {
   console.log(data);
 
-  // const [videos, setVideos] = useState([]);
   return (
     <>
       <SearchBar placeholder='Search' data={data} />
